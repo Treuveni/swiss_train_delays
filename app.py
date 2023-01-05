@@ -3,8 +3,11 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
+import plotly.io as pio
 import altair as alt
 import os
+
+pio.templates.default = "plotly_white"
 
 st.title('SBB Verspätungsanalyse')
 st.write('Die foldgenden Grafiken zeigen Analysen zur Verspätung von Zügen zwischen 3.11.2022 und 31.12.22.\nDashboard erstellt von: Tamara Reuveni Mazig || Datenquellen: opentransportdata.swiss, data.sbb.ch')
@@ -38,19 +41,21 @@ fig.update_layout(
         autosize=False,
         height=400,
         width =700, 
-        margin = dict(t=30, r=0, l=0, b=0),    
+        margin = dict(t=30, r=0, l=0, b=0),
+        template ="plotly",  
         geo = dict(
         scope ='europe',
         resolution = 50,
         projection_scale = 23,
         projection_type = 'boggs',
         center = dict(lat=46.8153, lon=8.2275),
+        
     ))
 
 
 st.subheader('Anteil verspätete Züge pro Haltestelle')
 st.write('Die Grösse der Blase repräsentiert die durchschnittliche tägliche Anzahl Züge pro Haltestelle.')
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True, theme="streamlit")
 # data = data.loc[:100000, :]
 # st.write(data.head(10))
 
@@ -83,3 +88,4 @@ hourly_df = hourly_df.reset_index()
 st.subheader('Durchschnittliche Anzahl verspätete Züge pro Stunde')
 c_area = alt.Chart(hourly_df).mark_area().encode(x='Stunde:Q', y='Anzahl Züge:Q', color='Verspätungskategorie:N')
 st.altair_chart(c_area, use_container_width =True, theme = 'streamlit')
+
