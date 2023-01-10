@@ -85,9 +85,8 @@ st.altair_chart(c_bar, use_container_width=True, theme = 'streamlit')
 hourly = df.groupby(['Datum','Stunde'])['Verspätungskategorie'].value_counts()
 hourly.name = 'Anzahl Halte'
 hourly = hourly.reset_index()
-hourly_df = hourly.groupby('Stunde')['Verspätungskategorie'].value_counts()
-hourly_df.name = 'Anzahl Halte'
-hourly_df = hourly_df.reset_index()
+hourly_df = hourly.groupby(['Stunde','Verspätungskategorie'])['Anzahl Halte'].mean().reset_index()
+
 st.subheader('Durchschnittliche Anzahl verspätete Halte pro Stunde')
 c_area = alt.Chart(hourly_df).mark_area().encode(x='Stunde:Q', y='Anzahl Halte:Q', color='Verspätungskategorie:N')
 st.altair_chart(c_area, use_container_width =True, theme = 'streamlit')
