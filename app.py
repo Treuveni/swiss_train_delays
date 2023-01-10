@@ -89,5 +89,5 @@ hourly_df = hourly.groupby(['Stunde','Verspätungskategorie'])['Anzahl Halte'].m
 hourly_df['Anzahl Halte'] = hourly_df['Anzahl Halte'].round()
 st.write(hourly_df.head())
 st.subheader('Durchschnittliche Anzahl verspätete Halte pro Stunde')
-c_area = alt.Chart(hourly_df).mark_area().encode(x='Stunde:Q', y='Anzahl Halte:Q', color='Verspätungskategorie:N')
+c_area = alt.Chart(hourly_df).mark_area().encode(x='Stunde:Q', y=alt.Y('Anzahl Halte:Q', stack=True), color='Verspätungskategorie:N')
 st.altair_chart(c_area, use_container_width =True, theme = 'streamlit')
