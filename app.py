@@ -94,5 +94,6 @@ c_area = alt.Chart(hourly_df).mark_area().encode(
     x='Stunde:Q', 
     y=alt.Y('Anzahl Halte:Q', stack=True), 
     color='Verspätungskategorie:N',
-    order=alt.Order('sum(Anzahl Halte):Q', sort='ascending'))
+    order=alt.Order('sum(Anzahl Halte):Q', sort='ascending')),
+    tooltip = ['Stunde','Verspätungskategorie','Anzahl Halte'],
 st.altair_chart(c_area, use_container_width =True, theme = 'streamlit')
