@@ -93,7 +93,6 @@ st.write('Für Halte mit verfügbarer Abfahrtszeit wird die Abfahrtszeit verwend
 c_area = alt.Chart(hourly_df).mark_area().encode(
     x='Stunde:Q', 
     y=alt.Y('Anzahl Halte:Q', stack=True), 
-    color='Verspätungskategorie:N',
-    order=alt.Order('sum(Anzahl Halte):Q', sort='ascending')),
-    tooltip = ['Stunde','Verspätungskategorie','Anzahl Halte'],
+    color='Verspätungskategorie:N', tooltip = ['Stunde','Verspätungskategorie','Anzahl Halte'],
+    order=alt.Order('sum(Anzahl Halte):Q', sort='ascending'))
 st.altair_chart(c_area, use_container_width =True, theme = 'streamlit')
