@@ -89,7 +89,7 @@ hourly_df = hourly.groupby(['Stunde','Verspätungskategorie'])['Anzahl Halte'].m
 hourly_df['Anzahl Halte'] = hourly_df['Anzahl Halte'].round()
 
 st.subheader('Durchschnittliche Anzahl Ankünfte / Abfahrten pro Verspätungskategorie und Uhrzeit')
-st.write('Für Halte mit verfügbarer Abfahrtszeit wird die Abfahrtszeit verwendet. Falls nur die Ankunftszeit verfügbar ist (z.B. bei der ersten Haltestelle von jedem Zug), wird diese verwendet.)
+st.write('Für Halte mit verfügbarer Abfahrtszeit wird die Abfahrtszeit verwendet. Falls nur die Ankunftszeit verfügbar ist (z.B. bei der ersten Haltestelle von jedem Zug), wird diese verwendet.')
 c_area = alt.Chart(hourly_df).mark_area().encode(
     x='Stunde:Q', 
     y=alt.Y('Anzahl Halte:Q', stack=True), 
